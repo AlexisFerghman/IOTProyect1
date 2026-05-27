@@ -18,7 +18,6 @@
 #include "fb_gfx.h"
 #include "esp32-hal-ledc.h"
 #include "sdkconfig.h"
-#include "camera_index.h"
 
 #if defined(ARDUINO_ARCH_ESP32) && defined(CONFIG_ARDUHAL_ESP_LOG)
 #include "esp32-hal-log.h"
@@ -96,6 +95,40 @@ typedef struct {
 static const char *_STREAM_CONTENT_TYPE = "multipart/x-mixed-replace;boundary=" PART_BOUNDARY;
 static const char *_STREAM_BOUNDARY = "\r\n--" PART_BOUNDARY "\r\n";
 static const char *_STREAM_PART = "Content-Type: image/jpeg\r\nContent-Length: %u\r\nX-Timestamp: %d.%06d\r\n\r\n";
+static const char *STREAM_PAGE_HTML = R"rawliteral(
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Camera Stream</title>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: #000;
+      overflow: hidden;
+      padding: 0;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <img id="stream" alt="Camera stream">
+  <script>
+    const stream = document.getElementById('stream');
+    stream.src = `http://${location.hostname}:81/stream`;
+  </script>
+</body>
+</html>
+)rawliteral";
 
 httpd_handle_t stream_httpd = NULL;
 httpd_handle_t camera_httpd = NULL;
@@ -1124,20 +1157,7 @@ static esp_err_t win_handler(httpd_req_t *req) {
 
 static esp_err_t index_handler(httpd_req_t *req) {
   httpd_resp_set_type(req, "text/html");
-  httpd_resp_set_hdr(req, "Content-Encoding", "gzip");
-  sensor_t *s = esp_camera_sensor_get();
-  if (s != NULL) {
-    if (s->id.PID == OV3660_PID) {
-      return httpd_resp_send(req, (const char *)index_ov3660_html_gz, index_ov3660_html_gz_len);
-    } else if (s->id.PID == OV5640_PID) {
-      return httpd_resp_send(req, (const char *)index_ov5640_html_gz, index_ov5640_html_gz_len);
-    } else {
-      return httpd_resp_send(req, (const char *)index_ov2640_html_gz, index_ov2640_html_gz_len);
-    }
-  } else {
-    log_e("Camera sensor not found");
-    return httpd_resp_send_500(req);
-  }
+  return httpd_resp_send(req, STREAM_PAGE_HTML, HTTPD_RESP_USE_STRLEN);
 }
 
 void startCameraServer() {
