@@ -1,0 +1,8 @@
+services:
+  face-recognition:
+    build: .
+    container_name: face_recognition
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app:/app/app
