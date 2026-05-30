@@ -5,11 +5,10 @@ from flask import Flask, Response, redirect
 from deepface import DeepFace
 import numpy as np
 import glob
-import threading, queue, time
 
 app = Flask(__name__)
 
-ESP32_STREAM_URL = os.getenv("ESP32_STREAM_URL", "http://10.144.208.145:81/stream")
+ESP32_STREAM_URL = os.getenv("ESP32_STREAM_URL", "http://192.168.1.11:81/stream")
 
 frame_count = 0
 
@@ -18,62 +17,59 @@ DB_PATH = os.getenv("KNOWN_FACES_PATH", "known_faces")
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "VGG-Face")
 EMBEDDING_THRESHOLD = float(os.getenv("EMBEDDING_THRESHOLD", "0.4"))
 
+
+def extract_embedding(result):
+    if isinstance(result, list):
+        if len(result) == 0:
+            raise ValueError("Empty embedding result")
+        result = result[0]
+    if isinstance(result, dict):
+        if "embedding" in result:
+            return np.array(result["embedding"], dtype=np.float32).reshape(-1)
+        if "face_embedding" in result:
+            return np.array(result["face_embedding"], dtype=np.float32).reshape(-1)
+        raise ValueError(f"Unsupported embedding dict keys: {list(result.keys())}")
+    return np.array(result, dtype=np.float32).reshape(-1)
+
+
 def load_known_embeddings(db_path=DB_PATH, model_name=EMBEDDING_MODEL):
-    entries = []
-    embeddings = []
+    metadata = []
+    embedding_vectors = []
     if not os.path.isdir(db_path):
         print(f"Known faces directory not found: {db_path}")
-        return entries, None
+        return metadata, None
 
-    # iterate over person folders
+    # Iterate over person folders and keep metadata separate from vectors.
     for person_dir in sorted(os.listdir(db_path)):
         person_path = os.path.join(db_path, person_dir)
         if not os.path.isdir(person_path):
             continue
-        # find image files
         pattern = os.path.join(person_path, "*.*")
         for img_path in glob.glob(pattern):
             if not img_path.lower().endswith(('.jpg', '.jpeg', '.png')):
                 continue
             try:
                 vec = DeepFace.represent(img_path=img_path, model_name=model_name, enforce_detection=False, detector_backend='opencv')
-                vec = np.array(vec).reshape(-1)
-                entries.append({
+                vec = extract_embedding(vec)
+                metadata.append({
                     'name': person_dir,
                     'path': img_path,
                 })
-                embeddings.append(vec)
+                embedding_vectors.append(vec)
             except Exception as e:
                 print(f"Failed to represent {img_path}: {e}")
-    if len(embeddings) == 0:
-        return entries, None
-    emb_matrix = np.vstack(embeddings)
-    # precompute norms for cosine similarity
-    emb_norms = np.linalg.norm(emb_matrix, axis=1)
-    return entries, (emb_matrix, emb_norms)
+    if len(embedding_vectors) == 0:
+        return metadata, None
+    emb_matrix = np.vstack(embedding_vectors) ## shape (N, D) where N=number of known faces, D=embedding dimension
+    emb_norms = np.linalg.norm(emb_matrix, axis=1) ## precompute norms for cosine similarity
+    print(f"Loaded {len(metadata)} known face embeddings from {db_path}", flush=True)
+    return metadata, (emb_matrix, emb_norms)
 
 # load embeddings at startup
-KNOWN_ENTRIES, KNOWN_EMBEDDINGS = load_known_embeddings()
+KNOWN_METADATA, KNOWN_EMBEDDINGS = load_known_embeddings()
 
 # load Haar cascade for face detection (for drawing bounding boxes)
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-
-proc_q = queue.Queue(maxsize=1)
-latest_annots = None  # escribe worker, lee main thread (reemplazo atómico)
-
-def worker():
-    # cargar modelo aquí si hace falta
-    while True:
-        frame_small = proc_q.get()  # bloquea hasta un frame
-        # detectar caras, representar, comparar embeddings...
-        annots = [ {'rect':(x,y,w,h),'name':name}, ... ]
-        # actualizar última anotación (asignación atómica)
-        global latest_annots
-        latest_annots = {'t': time.time(), 'annots': annots}
-        proc_q.task_done()
-
-# arrancar worker
-threading.Thread(target=worker, daemon=True).start()
 
 def generate_frames():
 
@@ -86,7 +82,7 @@ def generate_frames():
         if cap is None or not cap.isOpened():
             cap = cv2.VideoCapture(ESP32_STREAM_URL)
             if not cap.isOpened():
-                print(f"No se pudo abrir el stream: {ESP32_STREAM_URL}")
+                print(f"No se pudo abrir el stream: {ESP32_STREAM_URL}", flush=True)
                 time.sleep(2)
                 continue
 
@@ -103,11 +99,31 @@ def generate_frames():
         if frame_count % 15 == 0:
 
             small = cv2.resize(frame, (320,240))
+            print("Tomo un frame", flush=True)
 
             try:
-                # detect faces in the small frame to draw rectangles
-                gray_small = cv2.cvtColor(small, cv2.COLOR_BGR2GRAY)
-                faces = face_cascade.detectMultiScale(gray_small, scaleFactor=1.1, minNeighbors=5)
+                # detect faces using DeepFace so we get the facial area directly
+                faces = []
+                try:
+                    faces = DeepFace.extract_faces(
+                        img_path=small,
+                        detector_backend="opencv",
+                        enforce_detection=False,
+                        align=False
+                    )
+                    print(f"[FACE_DETECT] frame={frame_count} deepface_faces={len(faces)}", flush=True)
+                except Exception as detect_error:
+                    print(f"[FACE_DETECT] frame={frame_count} deepface_error={detect_error}", flush=True)
+
+                if len(faces) == 0:
+                    gray_small = cv2.cvtColor(small, cv2.COLOR_BGR2GRAY)
+                    haar_faces = face_cascade.detectMultiScale(gray_small, scaleFactor=1.1, minNeighbors=5)
+                    print(f"[FACE_DETECT] frame={frame_count} haar_faces={len(haar_faces)}", flush=True)
+                    for (x, y, w, h) in haar_faces:
+                        faces.append({
+                            "face": small[y:y + h, x:x + w],
+                            "facial_area": {"x": int(x), "y": int(y), "w": int(w), "h": int(h)}
+                        })
 
                 # scale factors to map small->original frame
                 sx = frame.shape[1] / small.shape[1]
@@ -115,16 +131,24 @@ def generate_frames():
 
                 if len(faces) > 0:
                     # for each detected face, compute embedding and try to ID
-                    for (x, y, w, h) in faces:
-                        # crop face region on small image
-                        face_crop = small[y:y+h, x:x+w]
+                    for face_item in faces:
+                        facial_area = face_item.get("facial_area", {})
+                        x = int(facial_area.get("x", 0))
+                        y = int(facial_area.get("y", 0))
+                        w = int(facial_area.get("w", 0))
+                        h = int(facial_area.get("h", 0))
+                        face_crop = face_item.get("face")
+                        if face_crop is None or w <= 0 or h <= 0:
+                            print(f"[FACE_SKIP] frame={frame_count} invalid_face_area={facial_area}", flush=True)
+                            continue
 
                         name = None
 
                         # If we have precomputed embeddings, use fast compare
-                        if KNOWN_EMBEDDINGS is not None and len(KNOWN_ENTRIES) > 0:
-                            qvec = DeepFace.represent(img=face_crop, model_name=EMBEDDING_MODEL, enforce_detection=False, detector_backend='opencv')
-                            qvec = np.array(qvec).reshape(-1)
+                        if KNOWN_EMBEDDINGS is not None and len(KNOWN_METADATA) > 0:
+                            print(f"[FACE_RECOGNIZE] frame={frame_count} faces={len(faces)}", flush=True)
+                            qvec = DeepFace.represent(img_path=face_crop, model_name=EMBEDDING_MODEL, enforce_detection=False, detector_backend='opencv')
+                            qvec = extract_embedding(qvec)
                             emb_matrix, emb_norms = KNOWN_EMBEDDINGS
                             qnorm = np.linalg.norm(qvec)
                             if qnorm != 0 and not np.any(emb_norms == 0):
@@ -132,10 +156,15 @@ def generate_frames():
                                 best_idx = int(np.argmax(sims))
                                 best_sim = float(sims[best_idx])
                                 if best_sim >= EMBEDDING_THRESHOLD:
-                                    name = KNOWN_ENTRIES[best_idx]['name']
+                                    name = KNOWN_METADATA[best_idx]['name']
+                                    print(f"[FACE_MATCH] frame={frame_count} detected=1 status=registered name={name} sim={best_sim:.4f}", flush=True)
+                                else:
+                                    print(f"[FACE_MATCH] frame={frame_count} detected=1 status=unknown sim={best_sim:.4f}", flush=True)
+                            else:
+                                print(f"[FACE_MATCH] frame={frame_count} detected=1 status=unknown reason=zero_norm", flush=True)
                         else:
                             result = DeepFace.find(
-                                img=face_crop,
+                                img_path=face_crop,
                                 db_path="known_faces",
                                 enforce_detection=False,
                                 detector_backend="opencv"
@@ -143,6 +172,9 @@ def generate_frames():
                             if len(result) > 0 and len(result[0]) > 0:
                                 identity = result[0].iloc[0]["identity"]
                                 name = identity.split("/")[-2]
+                                print(f"[FACE_MATCH] frame={frame_count} detected=1 status=registered name={name}", flush=True)
+                            else:
+                                print(f"[FACE_MATCH] frame={frame_count} detected=1 status=unknown", flush=True)
                         # draw rectangle on original-size frame with color based on recognition
                         rx = int(x * sx)
                         ry = int(y * sy)
@@ -156,6 +188,7 @@ def generate_frames():
                             label = "Unknown"
 
                         cv2.rectangle(frame, (rx, ry), (rx + rw, ry + rh), box_color, 2)
+                        print(f"[FACE_BOX] frame={frame_count} rect=({rx},{ry},{rw},{rh}) label={label}", flush=True)
                         # draw label background
                         label_y = ry + rh + 20
                         # ensure label is within frame
