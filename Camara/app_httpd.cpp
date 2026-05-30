@@ -1160,6 +1160,29 @@ static esp_err_t index_handler(httpd_req_t *req) {
   return httpd_resp_send(req, STREAM_PAGE_HTML, HTTPD_RESP_USE_STRLEN);
 }
 
+// Redirect requests on the main server to the stream server port (e.g. :81/stream)
+static esp_err_t stream_redirect_handler(httpd_req_t *req) {
+  // Try to obtain Host header
+  int host_len = httpd_req_get_hdr_value_len(req, "Host");
+  char host_buf[128] = {0};
+  if (host_len > 0 && host_len < (int)sizeof(host_buf)) {
+    if (httpd_req_get_hdr_value_str(req, "Host", host_buf, sizeof(host_buf)) == ESP_OK) {
+      // build redirect location to port+1 stream
+      char location[256];
+      snprintf(location, sizeof(location), "http://%s:81/stream", host_buf);
+      httpd_resp_set_status(req, "302 Found");
+      httpd_resp_set_hdr(req, "Location", location);
+      httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
+      return httpd_resp_send(req, NULL, 0);
+    }
+  }
+  // Fallback: simple redirect to /stream on same host (relative)
+  httpd_resp_set_status(req, "302 Found");
+  httpd_resp_set_hdr(req, "Location", ":81/stream");
+  httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
+  return httpd_resp_send(req, NULL, 0);
+}
+
 void startCameraServer() {
   httpd_config_t config = HTTPD_DEFAULT_CONFIG();
   config.max_uri_handlers = 16;
@@ -1227,6 +1250,13 @@ void startCameraServer() {
     .handle_ws_control_frames = false,
     .supported_subprotocol = NULL
 #endif
+  };
+
+  httpd_uri_t stream_redirect_uri = {
+    .uri = "/stream",
+    .method = HTTP_GET,
+    .handler = stream_redirect_handler,
+    .user_ctx = NULL
   };
 
   httpd_uri_t bmp_uri = {
@@ -1322,6 +1352,9 @@ void startCameraServer() {
     httpd_register_uri_handler(camera_httpd, &status_uri);
     httpd_register_uri_handler(camera_httpd, &capture_uri);
     httpd_register_uri_handler(camera_httpd, &bmp_uri);
+
+    // Register redirect so requests to http://<host>/stream are redirected to the stream server (:81)
+    httpd_register_uri_handler(camera_httpd, &stream_redirect_uri);
 
     httpd_register_uri_handler(camera_httpd, &xclk_uri);
     httpd_register_uri_handler(camera_httpd, &reg_uri);
