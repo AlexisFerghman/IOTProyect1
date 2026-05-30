@@ -99,7 +99,6 @@ def generate_frames():
         if frame_count % 15 == 0:
 
             small = cv2.resize(frame, (320,240))
-            print("Tomo un frame", flush=True)
 
             try:
                 # detect faces using DeepFace so we get the facial area directly
