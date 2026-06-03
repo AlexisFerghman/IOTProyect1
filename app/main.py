@@ -8,7 +8,7 @@ import glob
 
 app = Flask(__name__)
 
-ESP32_STREAM_URL = os.getenv("ESP32_STREAM_URL", "http://192.168.1.11:81/stream")
+ESP32_STREAM_URL = os.getenv("ESP32_STREAM_URL", "http://10.144.208.145/stream")
 
 frame_count = 0
 
@@ -186,18 +186,8 @@ def generate_frames():
                             box_color = (0, 0, 255)  # red for unknown
                             label = "Unknown"
 
-                        cv2.rectangle(frame, (rx, ry), (rx + rw, ry + rh), box_color, 2)
-                        print(f"[FACE_BOX] frame={frame_count} rect=({rx},{ry},{rw},{rh}) label={label}", flush=True)
-                        # draw label background
-                        label_y = ry + rh + 20
-                        # ensure label is within frame
-                        if label_y + 20 > frame.shape[0]:
-                            label_y = ry - 10
-                        (tw, th), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.7, 2)
-                        lx = rx
-                        ly = label_y
-                        cv2.rectangle(frame, (lx - 2, ly - th - 4), (lx + tw + 2, ly + 4), box_color, -1)
-                        cv2.putText(frame, label, (lx, ly), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,255,255), 2)
+                        # Drawing overlays disabled: keep recognition logic and console output only
+                        print(f"[FACE_RECOG] frame={frame_count} rect=({rx},{ry},{rw},{rh}) label={label}", flush=True)
 
             except Exception as e:
                 print(e)
