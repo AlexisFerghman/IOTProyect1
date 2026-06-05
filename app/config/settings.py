@@ -79,7 +79,7 @@ class Settings:
             _env_str("EMBEDDINGS_DIR", str(DEFAULT_EMBEDDINGS_DIR)), DEFAULT_EMBEDDINGS_DIR
         )
         return cls(
-            stream_url=_env_str("STREAM_URL", "http://localhost/stream"),
+            stream_url=_env_str("STREAM_URL", "http://localhost:5000/stream"),
             api_host=_env_str("API_HOST", "0.0.0.0"),
             api_port=_env_int("API_PORT", 5000),
             mqtt_host=_env_str("MQTT_HOST", "mosquitto"),
