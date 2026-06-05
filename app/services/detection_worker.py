@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import base64
 from datetime import datetime, timezone
 from threading import Event, Thread
 import time
+
+import cv2
 
 from app.config.settings import Settings
 from app.mqtt.publisher import MQTTPublisher
@@ -72,12 +75,21 @@ class DetectionWorker:
                 face_crop = self._detector.crop_face(frame, face_box)
                 embedding = self._embedding_service.extract_embedding(face_crop)
                 recognition = self._recognizer.recognize(embedding)
+                # Encodear face crop como base64 JPEG para enviarlo por MQTT
+                face_image_b64: str | None = None
+                try:
+                    _, jpeg_buf = cv2.imencode(".jpg", face_crop, [cv2.IMWRITE_JPEG_QUALITY, 75])
+                    face_image_b64 = base64.b64encode(jpeg_buf.tobytes()).decode("utf-8")
+                except Exception:
+                    pass
+
                 snapshot = DetectionSnapshot(
                     timestamp=datetime.now(timezone.utc).isoformat(),
                     person_detected=True,
                     known_person=recognition.known_person,
                     person_name=recognition.person_name,
                     confidence=recognition.confidence,
+                    face_image_b64=face_image_b64,
                 )
                 self._state.update_detection(snapshot)
 

@@ -13,6 +13,7 @@ class DetectionSnapshot:
     known_person: bool
     person_name: str | None
     confidence: float
+    face_image_b64: str | None = None
 
     @classmethod
     def empty(cls) -> "DetectionSnapshot":
@@ -22,6 +23,7 @@ class DetectionSnapshot:
             known_person=False,
             person_name=None,
             confidence=0.0,
+            face_image_b64=None,
         )
 
     def to_dict(self) -> dict[str, Any]:
