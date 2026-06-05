@@ -15,7 +15,7 @@ frame_count = 0
 # Precompute embeddings for known faces
 DB_PATH = os.getenv("KNOWN_FACES_PATH", "known_faces")
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "VGG-Face")
-EMBEDDING_THRESHOLD = float(os.getenv("EMBEDDING_THRESHOLD", "0.4"))
+EMBEDDING_THRESHOLD = float(os.getenv("EMBEDDING_THRESHOLD", "0.75"))
 
 
 def extract_embedding(result):
@@ -107,7 +107,7 @@ def generate_frames():
                     faces = DeepFace.extract_faces(
                         img_path=small,
                         detector_backend="opencv",
-                        enforce_detection=False,
+                        enforce_detection=True,
                         align=False
                     )
                     print(f"[FACE_DETECT] frame={frame_count} deepface_faces={len(faces)}", flush=True)
@@ -136,6 +136,12 @@ def generate_frames():
                         y = int(facial_area.get("y", 0))
                         w = int(facial_area.get("w", 0))
                         h = int(facial_area.get("h", 0))
+                        frame_area = small.shape[0] * small.shape[1]
+                        face_area = w * h
+
+                        if face_area > frame_area * 0.8:
+                            print("[FACE_SKIP] probable false positive")
+                            continue
                         face_crop = face_item.get("face")
                         if face_crop is None or w <= 0 or h <= 0:
                             print(f"[FACE_SKIP] frame={frame_count} invalid_face_area={facial_area}", flush=True)
@@ -165,7 +171,7 @@ def generate_frames():
                             result = DeepFace.find(
                                 img_path=face_crop,
                                 db_path="known_faces",
-                                enforce_detection=False,
+                                enforce_detection=True,
                                 detector_backend="opencv"
                             )
                             if len(result) > 0 and len(result[0]) > 0:
