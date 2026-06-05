@@ -1,0 +1,1 @@
+"""Publicacion de eventos MQTT."""
