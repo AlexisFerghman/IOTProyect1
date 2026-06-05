@@ -101,7 +101,7 @@ class EmbeddingService:
                     skipped_images += 1
                     continue
                 face_crop = self._detector.crop_face(image, face_box)
-                embedding = self._extract_embedding(face_crop)
+                embedding = self.extract_embedding(face_crop)
                 grouped_embeddings[person_name].append(self._normalize_embedding(embedding))
                 print(f"[FACE_RECOGNITION] Embedding generado para {person_name}/{image_path.name}")
 
@@ -146,10 +146,9 @@ class EmbeddingService:
         representations = DeepFace.represent(
             img_path=face_image,
             model_name=self._settings.recognition_model_name,
-            model=self._model,
             detector_backend="skip",
-            enforce_detection=False,
-            align=False,
+            enforce_detection=True,
+            align=True,
         )
         if isinstance(representations, list) and representations:
             embedding = np.array(representations[0]["embedding"], dtype=np.float32)

@@ -6,6 +6,9 @@ services:
     container_name: iot-face-service
     env_file:
       - .env
+    volumes:
+      - ./app/known_faces:/app/app/known_faces:ro
+      - ./app/embeddings:/app/app/embeddings
     ports:
       - "5001:5000"
     restart: unless-stopped

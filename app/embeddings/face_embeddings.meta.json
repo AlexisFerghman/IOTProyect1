@@ -1,0 +1,304 @@
+{
+  "created_at": "2026-06-05T16:38:25.468767+00:00",
+  "model_name": "Facenet512",
+  "dataset_signature": [
+    {
+      "path": "alexis/1.jpeg",
+      "mtime_ns": 1780675179540116887,
+      "size": 103666
+    },
+    {
+      "path": "alexis/10.jpeg",
+      "mtime_ns": 1780675179540944871,
+      "size": 150810
+    },
+    {
+      "path": "alexis/11.jpeg",
+      "mtime_ns": 1780675179541708322,
+      "size": 185590
+    },
+    {
+      "path": "alexis/12.jpeg",
+      "mtime_ns": 1780675179542391592,
+      "size": 187635
+    },
+    {
+      "path": "alexis/16.jpeg",
+      "mtime_ns": 1780675179543057402,
+      "size": 129304
+    },
+    {
+      "path": "alexis/17.jpeg",
+      "mtime_ns": 1780675179543754013,
+      "size": 136723
+    },
+    {
+      "path": "alexis/18.jpeg",
+      "mtime_ns": 1780675179544678031,
+      "size": 165364
+    },
+    {
+      "path": "alexis/19.jpeg",
+      "mtime_ns": 1780675179545456847,
+      "size": 162932
+    },
+    {
+      "path": "alexis/2.jpeg",
+      "mtime_ns": 1780675179546419628,
+      "size": 108817
+    },
+    {
+      "path": "alexis/20.jpeg",
+      "mtime_ns": 1780675179547309284,
+      "size": 149057
+    },
+    {
+      "path": "alexis/21.jpeg",
+      "mtime_ns": 1780675179548183853,
+      "size": 107056
+    },
+    {
+      "path": "alexis/23.jpeg",
+      "mtime_ns": 1780675179548959386,
+      "size": 142200
+    },
+    {
+      "path": "alexis/28.jpeg",
+      "mtime_ns": 1780675179549988169,
+      "size": 189354
+    },
+    {
+      "path": "alexis/3.jpeg",
+      "mtime_ns": 1780675179551342348,
+      "size": 210936
+    },
+    {
+      "path": "alexis/30.jpeg",
+      "mtime_ns": 1780675179552519965,
+      "size": 173265
+    },
+    {
+      "path": "alexis/4.jpeg",
+      "mtime_ns": 1780675179553685848,
+      "size": 119204
+    },
+    {
+      "path": "alexis/5.jpeg",
+      "mtime_ns": 1780675179554785242,
+      "size": 273620
+    },
+    {
+      "path": "alexis/6.jpeg",
+      "mtime_ns": 1780675179555834139,
+      "size": 153530
+    },
+    {
+      "path": "alexis/7.jpeg",
+      "mtime_ns": 1780675179556752709,
+      "size": 160989
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-05-28 at 15.27.03(1).jpeg",
+      "mtime_ns": 1780675179558841354,
+      "size": 141521
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-05-28 at 15.27.03(2).jpeg",
+      "mtime_ns": 1780675179559965541,
+      "size": 107198
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-05-28 at 15.27.03(3).jpeg",
+      "mtime_ns": 1780675179561240170,
+      "size": 115009
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-05-28 at 15.27.03.jpeg",
+      "mtime_ns": 1780675179562048459,
+      "size": 137704
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-05-28 at 15.27.04.jpeg",
+      "mtime_ns": 1780675179562792982,
+      "size": 115682
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-06-03 at 12.17.52 PM.jpeg",
+      "mtime_ns": 1780675179563851866,
+      "size": 90884
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-06-03 at 12.18.06 PM.jpeg",
+      "mtime_ns": 1780675179565058259,
+      "size": 84836
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-06-03 at 12.18.10 PM.jpeg",
+      "mtime_ns": 1780675179566608486,
+      "size": 93712
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-06-03 at 12.32.18 PM.jpeg",
+      "mtime_ns": 1780675179567710883,
+      "size": 189213
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-06-03 at 12.32.28 PM (2).jpeg",
+      "mtime_ns": 1780675179568860772,
+      "size": 150702
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-06-03 at 12.32.28 PM.jpeg",
+      "mtime_ns": 1780675179569616749,
+      "size": 98866
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-06-03 at 12.32.29 PM (1).jpeg",
+      "mtime_ns": 1780675179570494252,
+      "size": 67431
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-06-03 at 12.32.30 PM.jpeg",
+      "mtime_ns": 1780675179571692962,
+      "size": 68880
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-06-03 at 12.32.32 PM.jpeg",
+      "mtime_ns": 1780675179572820152,
+      "size": 89716
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-06-03 at 12.32.33 PM (2).jpeg",
+      "mtime_ns": 1780675179574247038,
+      "size": 84148
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-06-03 at 12.32.35 PM (1).jpeg",
+      "mtime_ns": 1780675179575207374,
+      "size": 117131
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-06-03 at 12.32.35 PM.jpeg",
+      "mtime_ns": 1780675179575981930,
+      "size": 69787
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-06-03 at 12.32.36 PM (2).jpeg",
+      "mtime_ns": 1780675179576983194,
+      "size": 68795
+    },
+    {
+      "path": "hector/WhatsApp Image 2026-06-03 at 12.32.38 PM.jpeg",
+      "mtime_ns": 1780675179578088663,
+      "size": 150847
+    },
+    {
+      "path": "jeremi/IMG-20260603-WA0004.jpg",
+      "mtime_ns": 1780675179580426367,
+      "size": 84025
+    },
+    {
+      "path": "jeremi/IMG-20260603-WA0005.jpg",
+      "mtime_ns": 1780675179581607825,
+      "size": 128785
+    },
+    {
+      "path": "jeremi/IMG-20260603-WA0006.jpg",
+      "mtime_ns": 1780675179582568022,
+      "size": 96988
+    },
+    {
+      "path": "jeremi/IMG-20260603-WA0007.jpg",
+      "mtime_ns": 1780675179583530524,
+      "size": 98374
+    },
+    {
+      "path": "jeremi/IMG-20260603-WA0008.jpg",
+      "mtime_ns": 1780675179584464460,
+      "size": 89322
+    },
+    {
+      "path": "jeremi/IMG-20260603-WA0009.jpg",
+      "mtime_ns": 1780675179585604013,
+      "size": 68396
+    },
+    {
+      "path": "jeremi/IMG-20260603-WA0016.jpg",
+      "mtime_ns": 1780675179586816412,
+      "size": 102984
+    },
+    {
+      "path": "jeremi/IMG-20260603-WA0018.jpg",
+      "mtime_ns": 1780675179587853854,
+      "size": 75954
+    },
+    {
+      "path": "jeremi/IMG-20260603-WA0021.jpg",
+      "mtime_ns": 1780675179588796940,
+      "size": 101935
+    },
+    {
+      "path": "jeremi/IMG-20260603-WA0022.jpg",
+      "mtime_ns": 1780675179589771245,
+      "size": 80063
+    },
+    {
+      "path": "jeremi/IMG-20260603-WA0025.jpg",
+      "mtime_ns": 1780675179590750928,
+      "size": 96063
+    },
+    {
+      "path": "jeremi/IMG-20260603-WA0027.jpg",
+      "mtime_ns": 1780675179591779361,
+      "size": 66374
+    },
+    {
+      "path": "jeremi/IMG-20260603-WA0032.jpg",
+      "mtime_ns": 1780675179592956978,
+      "size": 107266
+    },
+    {
+      "path": "jeremi/IMG-20260603-WA0034.jpg",
+      "mtime_ns": 1780675179594212400,
+      "size": 77174
+    },
+    {
+      "path": "jeremi/WhatsApp Image 2026-05-28 at 15.20.12.jpeg",
+      "mtime_ns": 1780675179595347692,
+      "size": 55492
+    },
+    {
+      "path": "jeremi/WhatsApp Image 2026-05-28 at 15.20.14.jpeg",
+      "mtime_ns": 1780675179596538998,
+      "size": 64365
+    },
+    {
+      "path": "jeremi/WhatsApp Image 2026-05-28 at 15.20.16.jpeg",
+      "mtime_ns": 1780675179597299445,
+      "size": 62422
+    },
+    {
+      "path": "jeremi/WhatsApp Image 2026-05-28 at 15.20.17 (1).jpeg",
+      "mtime_ns": 1780675179598374463,
+      "size": 67648
+    },
+    {
+      "path": "jeremi/WhatsApp Image 2026-05-28 at 15.20.17.jpeg",
+      "mtime_ns": 1780675179599553966,
+      "size": 63665
+    },
+    {
+      "path": "jeremi/WhatsApp Image 2026-06-03 at 12.20.20.jpeg",
+      "mtime_ns": 1780675179600785502,
+      "size": 75086
+    },
+    {
+      "path": "jeremi/WhatsApp Image 2026-06-03 at 12.21.35 (1).jpeg",
+      "mtime_ns": 1780675179601928198,
+      "size": 46703
+    }
+  ],
+  "processed_images": 59,
+  "skipped_images": 16,
+  "persons": 3
+}
