@@ -1,0 +1,1439 @@
+[
+    {
+        "id": "d7632a6567c9f6cb",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "be21921458affd31",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "",
+        "topic": "smarthome/equipoHector/datos",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 350,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ff297800fbea22a0",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "",
+        "topic": "smarthome/equipoHector/temperatura",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 370,
+        "y": 600,
+        "wires": [
+            [
+                "7394f3de3c895b23",
+                "ef58b7cc1c8df843",
+                "1284d5f0630466eb"
+            ]
+        ]
+    },
+    {
+        "id": "6da716b9eb5f38db",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "",
+        "topic": "smarthome/equipoHector/humedad",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 360,
+        "y": 680,
+        "wires": [
+            [
+                "bd4a3c1bf62a5270",
+                "ef58b7cc1c8df843",
+                "216c877feb1b0e30"
+            ]
+        ]
+    },
+    {
+        "id": "548e21fd491d4d90",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "",
+        "topic": "smarthome/equipoHector/gas/mq6",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 360,
+        "y": 760,
+        "wires": [
+            [
+                "692946e7f0e6b1b1",
+                "ef58b7cc1c8df843",
+                "07d031f129abaa18"
+            ]
+        ]
+    },
+    {
+        "id": "cb6f677567ef3849",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "",
+        "topic": "smarthome/equipoHector/gas/mq7",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 360,
+        "y": 840,
+        "wires": [
+            [
+                "8467e8e077dab842",
+                "ef58b7cc1c8df843",
+                "fa9a919eb7935787"
+            ]
+        ]
+    },
+    {
+        "id": "7d4cb716eb40eccd",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "",
+        "topic": "smarthome/equipoHector/sonido/microfono",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 380,
+        "y": 920,
+        "wires": [
+            [
+                "7229e3e5ce6f6de6",
+                "ef58b7cc1c8df843",
+                "a2e1be8a3f592390"
+            ]
+        ]
+    },
+    {
+        "id": "a2ef6f4d4f5af2a8",
+        "type": "ui_gauge",
+        "z": "d7632a6567c9f6cb",
+        "name": "TEMPERATURA",
+        "group": "9ddf764e5b8d89a6",
+        "order": 1,
+        "width": "6",
+        "height": "5",
+        "gtype": "gage",
+        "title": "TEMPERATURA",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 950,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "debe7739f524bcf6",
+        "type": "ui_gauge",
+        "z": "d7632a6567c9f6cb",
+        "name": "",
+        "group": "3d5c2aa3a3e7146a",
+        "order": 1,
+        "width": "6",
+        "height": "5",
+        "gtype": "gage",
+        "title": "HUMEDAD",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 830,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "20730b52fe02c5b9",
+        "type": "ui_gauge",
+        "z": "d7632a6567c9f6cb",
+        "name": "",
+        "group": "7f78e5694e4bcc2c",
+        "order": 1,
+        "width": "6",
+        "height": "5",
+        "gtype": "gage",
+        "title": "GAS MQ6",
+        "label": "ADC",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1023",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 830,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "1987e7f0949d05e7",
+        "type": "ui_gauge",
+        "z": "d7632a6567c9f6cb",
+        "name": "",
+        "group": "b7e3e4a3fc498ced",
+        "order": 1,
+        "width": "6",
+        "height": "5",
+        "gtype": "gage",
+        "title": "CO MQ7",
+        "label": "ADC",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1023",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "01679146c4fc84bc",
+        "type": "ui_gauge",
+        "z": "d7632a6567c9f6cb",
+        "name": "",
+        "group": "93f5e7ee548f0431",
+        "order": 1,
+        "width": "6",
+        "height": "5",
+        "gtype": "gage",
+        "title": "SONIDO",
+        "label": "ADC",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1023",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "7394f3de3c895b23",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "Preparar Notificacion",
+        "func": "let datos = typeof msg.payload === \"string\" ? JSON.parse(msg.payload) : msg.payload;\nlet temperatura = Number(datos.temperatura).toFixed(2);\ntemperatura = Number(temperatura);\nlet umbral = 30;\n\n// Recuperamos las variables de la memoria del nodo (o las iniciamos si no existen)\nlet estadoAlerta = context.get(\"estadoAlerta\") || false;\nlet maxTempAlcanzada = context.get(\"maxTempAlcanzada\") || 0;\n\nlet timestamp = new Date().toLocaleString(\"es-CL\", {\n    timeZone: \"America/Santiago\",\n});\n\nlet texto = \"\";\n\n// 1. CONDICIÓN: Supera el umbral por primera vez\nif (temperatura > umbral && !estadoAlerta) {\n    context.set(\"estadoAlerta\", true);\n    context.set(\"maxTempAlcanzada\", temperatura);\n    \n    texto = `🚨 Alerta SmartHome IoT\\n\\nEvento: Temperatura ALTA superó umbral\\nValor: ${temperatura} °C\\nHora: ${timestamp}`;\n\n// 2. CONDICIÓN: Ya estaba en alerta, pero subió mucho más (ej: subió 2 grados más)\n} else if (temperatura > umbral && estadoAlerta) {\n    if (temperatura >= maxTempAlcanzada + 2) {\n        context.set(\"maxTempAlcanzada\", temperatura); // Actualizamos el nuevo máximo\n        texto = `📈 Alerta SmartHome IoT\\n\\nEvento: Temperatura SIGUE SUBIENDO\\nValor: ${temperatura} °C\\nHora: ${timestamp}`;\n    } else {\n        // Sigue alto, pero no ha subido lo suficiente para otra alerta. Ignoramos.\n        return null; \n    }\n\n// 3. CONDICIÓN: Bajó del umbral y se normalizó\n} else if (temperatura <= umbral && estadoAlerta) {\n    context.set(\"estadoAlerta\", false);\n    context.set(\"maxTempAlcanzada\", 0); // Reseteamos la memoria\n    \n    texto = `✅ Alerta SmartHome IoT\\n\\nEvento: Temperatura NORMALIZADA\\nValor: ${temperatura} °C\\nHora: ${timestamp}`;\n\n// 4. CONDICIÓN: Todo está normal, no hacemos nada\n} else {\n    return null;\n}\n\n// =======================\n// PREPARACIÓN DE MENSAJES\n// =======================\nlet telegramMsg = {\n    payload: {\n        chatId: -1003932861041,\n        type: \"message\",\n        content: texto\n    }\n};\n\nlet dashboardMsg = {\n    payload: texto\n};\n\n// NOTA: Para que salgan ambos mensajes por una sola salida en Node-RED, \n// deben ir envueltos en un array extra.\nreturn [[telegramMsg, dashboardMsg]];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 3,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 600,
+        "wires": [
+            [
+                "9a68e7991f4d5079"
+            ]
+        ]
+    },
+    {
+        "id": "90c6c08f9ef4a6ca",
+        "type": "telegram sender",
+        "z": "d7632a6567c9f6cb",
+        "name": "Notificacion",
+        "bot": "e483d5aaec520c23",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1230,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9a68e7991f4d5079",
+        "type": "delay",
+        "z": "d7632a6567c9f6cb",
+        "name": "Delay",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1030,
+        "y": 760,
+        "wires": [
+            [
+                "90c6c08f9ef4a6ca"
+            ]
+        ]
+    },
+    {
+        "id": "bd4a3c1bf62a5270",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "Preparar Notificacion",
+        "func": "let datos = typeof msg.payload === \"string\" ? JSON.parse(msg.payload) : msg.payload;\nlet humedad = Number(datos.humedad).toFixed(2);\nhumedad = Number(humedad);\nlet umbral = 75;\nlet escalada = 5; // Cuánto % debe subir para enviar otra alerta\n\nlet estadoAlerta = context.get(\"estadoAlerta\") || false;\nlet maxAlcanzada = context.get(\"maxAlcanzada\") || 0;\n\nlet timestamp = new Date().toLocaleString(\"es-CL\", { timeZone: \"America/Santiago\" });\nlet texto = \"\";\n\nif (humedad > umbral && !estadoAlerta) {\n    context.set(\"estadoAlerta\", true);\n    context.set(\"maxAlcanzada\", humedad);\n    texto = `💧 Alerta SmartHome IoT\\n\\nEvento: Humedad ALTA superó umbral\\nValor: ${humedad} %\\nHora: ${timestamp}`;\n\n} else if (humedad > umbral && estadoAlerta) {\n    if (humedad >= maxAlcanzada + escalada) {\n        context.set(\"maxAlcanzada\", humedad);\n        texto = `📈 Alerta SmartHome IoT\\n\\nEvento: Humedad SIGUE SUBIENDO\\nValor: ${humedad} %\\nHora: ${timestamp}`;\n    } else {\n        return null; \n    }\n\n} else if (humedad <= umbral && estadoAlerta) {\n    context.set(\"estadoAlerta\", false);\n    context.set(\"maxAlcanzada\", 0);\n    texto = `✅ Alerta SmartHome IoT\\n\\nEvento: Humedad NORMALIZADA\\nValor: ${humedad} %\\nHora: ${timestamp}`;\n\n} else {\n    return null;\n}\n\nmsg.payload = {\n    chatId: -1003932861041,\n    type: \"message\",\n    content: texto\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 3,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 680,
+        "wires": [
+            [
+                "9a68e7991f4d5079"
+            ]
+        ]
+    },
+    {
+        "id": "692946e7f0e6b1b1",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "Preparar Notificacion",
+        "func": "let datos = typeof msg.payload === \"string\" ? JSON.parse(msg.payload) : msg.payload;\nlet mq6 = Number(datos.mq6).toFixed(2);\nmq6 = Number(mq6);\nlet umbralAlerta = 600;\nlet umbralNormal = 580; // Debe bajar a 580 para considerar que se disipó (evita falsos normalizados)\nlet escalada = 50; // Cuántos puntos ADC debe subir para otra alerta\n\nlet estadoAlerta = context.get(\"estadoAlerta\") || false;\nlet maxAlcanzada = context.get(\"maxAlcanzada\") || 0;\n\nlet timestamp = new Date().toLocaleString(\"es-CL\", { timeZone: \"America/Santiago\" });\nlet texto = \"\";\n\nif (mq6 > umbralAlerta && !estadoAlerta) {\n    context.set(\"estadoAlerta\", true);\n    context.set(\"maxAlcanzada\", mq6);\n    texto = `🚨 Alerta SmartHome IoT\\n\\nEvento: Gas Inflamable (MQ6) DETECTADO\\nValor: ${mq6} ADC\\nHora: ${timestamp}`;\n\n} else if (mq6 > umbralAlerta && estadoAlerta) {\n    if (mq6 >= maxAlcanzada + escalada) {\n        context.set(\"maxAlcanzada\", mq6);\n        texto = `⚠️ Alerta SmartHome IoT\\n\\nEvento: Gas Inflamable SIGUE AUMENTANDO\\nValor: ${mq6} ADC\\nHora: ${timestamp}`;\n    } else {\n        return null; \n    }\n\n} else if (mq6 <= umbralNormal && estadoAlerta) {\n    context.set(\"estadoAlerta\", false);\n    context.set(\"maxAlcanzada\", 0);\n    texto = `✅ Alerta SmartHome IoT\\n\\nEvento: Gas Inflamable DISIPADO\\nValor: ${mq6} ADC\\nHora: ${timestamp}`;\n\n} else {\n    return null;\n}\n\nmsg.payload = {\n    chatId: -1003932861041,\n    type: \"message\",\n    content: texto\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 3,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 760,
+        "wires": [
+            [
+                "9a68e7991f4d5079"
+            ]
+        ]
+    },
+    {
+        "id": "8467e8e077dab842",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "Preparar Notificacion",
+        "func": "let datos = typeof msg.payload === \"string\" ? JSON.parse(msg.payload) : msg.payload;\nlet mq7 = Number(datos.mq7).toFixed(2);\nmq7 = Number(mq7);\nlet umbralAlerta = 500;\nlet umbralNormal = 480; \nlet escalada = 50; \n\nlet estadoAlerta = context.get(\"estadoAlerta\") || false;\nlet maxAlcanzada = context.get(\"maxAlcanzada\") || 0;\n\nlet timestamp = new Date().toLocaleString(\"es-CL\", { timeZone: \"America/Santiago\" });\nlet texto = \"\";\n\nif (mq7 > umbralAlerta && !estadoAlerta) {\n    context.set(\"estadoAlerta\", true);\n    context.set(\"maxAlcanzada\", mq7);\n    texto = `☠️ Alerta SmartHome IoT\\n\\nEvento: Posible Monóxido (MQ7) DETECTADO\\nValor: ${mq7} ADC\\nHora: ${timestamp}`;\n\n} else if (mq7 > umbralAlerta && estadoAlerta) {\n    if (mq7 >= maxAlcanzada + escalada) {\n        context.set(\"maxAlcanzada\", mq7);\n        texto = `⚠️ Alerta SmartHome IoT\\n\\nEvento: Monóxido SIGUE AUMENTANDO\\nValor: ${mq7} ADC\\nHora: ${timestamp}`;\n    } else {\n        return null; \n    }\n\n} else if (mq7 <= umbralNormal && estadoAlerta) {\n    context.set(\"estadoAlerta\", false);\n    context.set(\"maxAlcanzada\", 0);\n    texto = `✅ Alerta SmartHome IoT\\n\\nEvento: Monóxido DISIPADO\\nValor: ${mq7} ADC\\nHora: ${timestamp}`;\n\n} else {\n    return null;\n}\n\nmsg.payload = {\n    chatId: -1003932861041,\n    type: \"message\",\n    content: texto\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 3,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 840,
+        "wires": [
+            [
+                "9a68e7991f4d5079"
+            ]
+        ]
+    },
+    {
+        "id": "7229e3e5ce6f6de6",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "Preparar Notificacion",
+        "func": "let datos = typeof msg.payload === \"string\" ? JSON.parse(msg.payload) : msg.payload;\nlet microfono = Number(datos.microfono).toFixed(2);\nmicrofono = Number(microfono);\nlet umbralAlerta = 900;\nlet umbralNormal = 800; // Nivel de silencio relativo\n\nlet estadoAlerta = context.get(\"estadoAlerta\") || false;\n\nlet timestamp = new Date().toLocaleString(\"es-CL\", { timeZone: \"America/Santiago\" });\nlet texto = \"\";\n\nif (microfono > umbralAlerta && !estadoAlerta) {\n    context.set(\"estadoAlerta\", true);\n    texto = `🔊 Alerta SmartHome IoT\\n\\nEvento: RUIDO FUERTE detectado\\nValor: ${microfono} ADC\\nHora: ${timestamp}`;\n\n} else if (microfono > umbralAlerta && estadoAlerta) {\n    // Si sigue el ruido, simplemente ignoramos para no spamear\n    return null;\n\n} else if (microfono <= umbralNormal && estadoAlerta) {\n    context.set(\"estadoAlerta\", false);\n    texto = `✅ Alerta SmartHome IoT\\n\\nEvento: Silencio reestablecido\\nValor: ${microfono} ADC\\nHora: ${timestamp}`;\n\n} else {\n    return null;\n}\n\nmsg.payload = {\n    chatId: -1003932861041,\n    type: \"message\",\n    content: texto\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 3,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 920,
+        "wires": [
+            [
+                "9a68e7991f4d5079"
+            ]
+        ]
+    },
+    {
+        "id": "ef58b7cc1c8df843",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "function 1",
+        "func": "let datos = typeof msg.payload === \"string\" ? JSON.parse(msg.payload) : msg.payload;\n// Obtenemos el nombre del sensor desde la última parte del tópico\n// Ejemplo: \"smarthome/equipoHector/temperatura\" -> \"temperatura\"\n//let sensor = msg.topic.split('/').pop(); \n//let valor = String(datos.temperatura);\nlet fecha = new Date().toLocaleString(\"es-CL\", { timeZone: \"America/Santiago\" });\n\n// Creamos un objeto que el nodo CSV entenderá como columnas\nmsg.payload = {\n    Fecha: fecha,\n    Datos: datos\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 540,
+        "wires": [
+            [
+                "9d59ac78a8cf26da"
+            ]
+        ]
+    },
+    {
+        "id": "9d59ac78a8cf26da",
+        "type": "csv",
+        "z": "d7632a6567c9f6cb",
+        "name": "",
+        "spec": "rfc",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "once",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "Fecha,Datos",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 610,
+        "y": 500,
+        "wires": [
+            [
+                "b22884c040bb895f"
+            ]
+        ]
+    },
+    {
+        "id": "b22884c040bb895f",
+        "type": "file",
+        "z": "d7632a6567c9f6cb",
+        "name": "",
+        "filename": "/usr/src/node-red/datos_sensores_V2.csv",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 900,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fe551697e7eea59d",
+        "type": "ui_chart",
+        "z": "d7632a6567c9f6cb",
+        "name": "CHART TEMPERATURA",
+        "group": "grp_hist_temp",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "label": "Temperatura Historica",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "40",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 970,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "439ed86880e070c1",
+        "type": "ui_switch",
+        "z": "d7632a6567c9f6cb",
+        "name": "Control LED",
+        "label": "Abrete Sesamo",
+        "tooltip": "Enciende o apaga el LED manualmente",
+        "group": "grupo_iluminacion",
+        "order": 1,
+        "width": "6",
+        "height": "5",
+        "passthru": true,
+        "decouple": "false",
+        "topic": "smarthome/equipoHector/control/led",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "ON",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "OFF",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 530,
+        "y": 1000,
+        "wires": [
+            [
+                "ad5064d4a3050246"
+            ]
+        ]
+    },
+    {
+        "id": "ad5064d4a3050246",
+        "type": "mqtt out",
+        "z": "d7632a6567c9f6cb",
+        "name": "Enviar a Dispositivo",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8f4f8bc6f091abf8",
+        "x": 790,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "1284d5f0630466eb",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "function 2",
+        "func": "let datos = typeof msg.payload === \"string\" ? JSON.parse(msg.payload) : msg.payload;\n\n// Convertimos a número, redondeamos y pasamos a String automáticamente con toFixed(2)\nmsg.payload = Number(datos.temperatura).toFixed(2);\n\n// Retornamos el objeto de mensaje completo\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 540,
+        "wires": [
+            [
+                "a2ef6f4d4f5af2a8",
+                "fe551697e7eea59d"
+            ]
+        ]
+    },
+    {
+        "id": "c90aa9002be09486",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "smarthome/equipoHector/camara/evento",
+        "topic": "smarthome/equipoHector/camara/evento",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 380,
+        "y": 1080,
+        "wires": [
+            [
+                "a3154b7634911a4b",
+                "1f1cd97265d9ddaf"
+            ]
+        ]
+    },
+    {
+        "id": "a3154b7634911a4b",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "Preparar Notificacion",
+        "func": "let d = msg.payload;\n\n// Si viene como texto JSON, intentar convertirlo\nif (typeof d === \"string\") {\n    try {\n        d = JSON.parse(d);\n    } catch (e) {\n        node.warn(\"No se pudo convertir el mensaje de cámara a JSON\");\n        return null;\n    }\n}\n\n// Validar si detectó persona\nif (d.person_detected !== true) {\n    return null;\n}\n\n// NUEVO: Validar que la confianza sea mayor al 40% \n// (Asumiendo que d.confidence viene en decimales, ej: 0.45 es 45%)\nif (d.confidence === undefined || Number(d.confidence) <= 0.50) {\n    return null; // Detiene el flujo si la confianza es de 40% o menos\n}\n\nlet timestamp = d.timestamp\n    ? new Date(d.timestamp).toLocaleString(\"es-CL\", { timeZone: \"America/Santiago\" })\n    : new Date().toLocaleString(\"es-CL\", { timeZone: \"America/Santiago\" });\n\n// Como ya validamos que d.confidence existe arriba, podemos simplificar esta variable\nlet confianza = (Number(d.confidence) * 100).toFixed(2);\n\nlet evento = \"\";\nlet detallePersona = \"\";\n\nif (d.known_person === true) {\n    evento = \"Persona conocida detectada\";\n    detallePersona = `Nombre: ${d.person_name || \"No especificado\"}`;\n} else {\n    evento = \"Persona desconocida detectada\";\n    detallePersona = \"Nombre: No reconocida\";\n}\n\nlet texto =\n    `📷 Alerta SmartHome IoT\n\nEvento: ${evento}\n${detallePersona}\nConfianza: ${confianza} %\nFecha y hora: ${timestamp}`;\n\n// Salida 1: Telegram\nlet telegramMsg = {\n    payload: {\n        chatId: -1003932861041,\n        type: \"message\",\n        content: texto\n    }\n};\n\n// Salida 2: Dashboard show notification\nlet dashboardMsg = {\n    payload: texto\n};\n\nreturn [telegramMsg, dashboardMsg];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 1080,
+        "wires": [
+            [
+                "9a68e7991f4d5079"
+            ]
+        ]
+    },
+    {
+        "id": "216c877feb1b0e30",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "function 3",
+        "func": "let datos = typeof msg.payload === \"string\" ? JSON.parse(msg.payload) : msg.payload;\n\n// Convertimos a número, redondeamos y pasamos a String automáticamente con toFixed(2)\nmsg.payload = Number(datos.humedad).toFixed(2);\n\n// Retornamos el objeto de mensaje completo\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 640,
+        "wires": [
+            [
+                "debe7739f524bcf6"
+            ]
+        ]
+    },
+    {
+        "id": "07d031f129abaa18",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "function 4",
+        "func": "let datos = typeof msg.payload === \"string\" ? JSON.parse(msg.payload) : msg.payload;\n\n// Convertimos a número, redondeamos y pasamos a String automáticamente con toFixed(2)\nmsg.payload = Number(datos.mq6).toFixed(2);\n\n// Retornamos el objeto de mensaje completo\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 720,
+        "wires": [
+            [
+                "20730b52fe02c5b9"
+            ]
+        ]
+    },
+    {
+        "id": "fa9a919eb7935787",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "function 5",
+        "func": "let datos = typeof msg.payload === \"string\" ? JSON.parse(msg.payload) : msg.payload;\n\n// Convertimos a número, redondeamos y pasamos a String automáticamente con toFixed(2)\nmsg.payload = Number(datos.mq7).toFixed(2);\n\n// Retornamos el objeto de mensaje completo\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 800,
+        "wires": [
+            [
+                "1987e7f0949d05e7"
+            ]
+        ]
+    },
+    {
+        "id": "a2e1be8a3f592390",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "function 6",
+        "func": "let datos = typeof msg.payload === \"string\" ? JSON.parse(msg.payload) : msg.payload;\n\n// Convertimos a número, redondeamos y pasamos a String automáticamente con toFixed(2)\nmsg.payload = Number(datos.microfono).toFixed(2);\n\n// Retornamos el objeto de mensaje completo\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 880,
+        "wires": [
+            [
+                "01679146c4fc84bc"
+            ]
+        ]
+    },
+    {
+        "id": "1f1cd97265d9ddaf",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "Preparar Imagen Cara",
+        "func": "let d = msg.payload;\nif (typeof d === 'string') {\n    try { d = JSON.parse(d); } catch(e) { return null; }\n}\nif (!d.person_detected) return null;\nmsg.payload = d;\nif (d.face_image_b64) {\n    msg.payload.img_src = 'data:image/jpeg;base64,' + d.face_image_b64;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 1220,
+        "wires": [
+            [
+                "65d3f0e26f3a4b2b"
+            ]
+        ]
+    },
+    {
+        "id": "65d3f0e26f3a4b2b",
+        "type": "ui_template",
+        "z": "d7632a6567c9f6cb",
+        "group": "22831f1b4a40ce5e",
+        "name": "Camara ESP32",
+        "order": 1,
+        "width": "12",
+        "height": "9",
+        "format": "<div style=\"display:flex;align-items:center;gap:24px;padding:12px;font-family:sans-serif;height:100%\">\n\n  <div style=\"flex:0 0 280px;\">\n    <div ng-if=\"msg.payload.img_src\"\n         ng-style=\"{'background-image':'url('+msg.payload.img_src+')'}\"\n         style=\"\n           width:280px;\n           height:280px;\n           border-radius:14px;\n           border:3px solid #444;\n           background-size:cover;\n           background-position:center;\n           box-shadow:0 4px 12px rgba(0,0,0,0.25);\n         \">\n    </div>\n\n    <div ng-if=\"!msg.payload.img_src\"\n         style=\"\n           width:280px;\n           height:280px;\n           border-radius:14px;\n           border:2px dashed #777;\n           display:flex;\n           align-items:center;\n           justify-content:center;\n           color:#777;\n           font-size:14px;\n         \">\n      Sin detección\n    </div>\n  </div>\n\n  <div style=\"flex:1\">\n    <div ng-if=\"msg.payload.person_detected\">\n      <div ng-style=\"{color: msg.payload.known_person ? '#4CAF50' : '#f44336'}\"\n           style=\"font-size:30px;font-weight:bold;margin-bottom:10px\">\n        {{msg.payload.known_person ? '✅ ' + msg.payload.person_name : '⚠️ Persona desconocida'}}\n      </div>\n\n      <div style=\"font-size:16px;color:#777;margin-bottom:6px\">\n        🎯 Confianza:\n        <strong>{{(msg.payload.confidence * 100).toFixed(1)}}%</strong>\n      </div>\n\n      <div style=\"font-size:14px;color:#777\">\n        🕐 {{msg.payload.timestamp}}\n      </div>\n    </div>\n\n    <div ng-if=\"!msg.payload.person_detected\" style=\"color:#777;font-size:16px\">\n      No se detectó persona\n    </div>\n  </div>\n\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 860,
+        "y": 1220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8fe9c35b64bc7445",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "Estado Temperatura",
+        "topic": "smarthome/equipoHector/temperatura",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 310,
+        "y": 1320,
+        "wires": [
+            [
+                "79b7a4b5e5132611"
+            ]
+        ]
+    },
+    {
+        "id": "169014e0cffc4726",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "Estado Humedad",
+        "topic": "smarthome/equipoHector/humedad",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 300,
+        "y": 1380,
+        "wires": [
+            [
+                "79b7a4b5e5132611"
+            ]
+        ]
+    },
+    {
+        "id": "f25dac45938cb891",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "Estado MQ6",
+        "topic": "smarthome/equipoHector/gas/mq6",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 290,
+        "y": 1440,
+        "wires": [
+            [
+                "79b7a4b5e5132611"
+            ]
+        ]
+    },
+    {
+        "id": "32acea905890c610",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "Estado MQ7",
+        "topic": "smarthome/equipoHector/gas/mq7",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 290,
+        "y": 1500,
+        "wires": [
+            [
+                "79b7a4b5e5132611"
+            ]
+        ]
+    },
+    {
+        "id": "531efcd009c4a563",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "Estado Sonido",
+        "topic": "smarthome/equipoHector/sonido/microfono",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 300,
+        "y": 1560,
+        "wires": [
+            [
+                "79b7a4b5e5132611"
+            ]
+        ]
+    },
+    {
+        "id": "79b7a4b5e5132611",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "Preparar Estado y Alertas",
+        "func": "let datos = msg.payload;\n\nif (typeof datos === \"string\") {\n    try {\n        datos = JSON.parse(datos);\n    } catch (e) {\n        node.warn(\"Estado general: payload no es JSON válido\");\n        return null;\n    }\n}\n\nlet estado = context.get(\"estado\") || {\n    temperatura: null,\n    humedad: null,\n    mq6: null,\n    mq7: null,\n    microfono: null,\n    ultimaActualizacion: null\n};\n\nif (datos.temperatura !== undefined) estado.temperatura = Number(datos.temperatura).toFixed(2);\nif (datos.humedad !== undefined) estado.humedad = Number(datos.humedad).toFixed(2);\nif (datos.mq6 !== undefined) estado.mq6 = Number(datos.mq6).toFixed(0);\nif (datos.mq7 !== undefined) estado.mq7 = Number(datos.mq7).toFixed(0);\nif (datos.microfono !== undefined) estado.microfono = Number(datos.microfono).toFixed(0);\n\nestado.ultimaActualizacion = new Date().toLocaleString(\"es-CL\", {\n    timeZone: \"America/Santiago\"\n});\n\nlet alertas = [];\n\nif (estado.temperatura !== null && Number(estado.temperatura) > 30) {\n    alertas.push({sensor:\"Temperatura\", detalle:\"Temperatura alta\", valor: estado.temperatura + \" °C\"});\n}\n\nif (estado.humedad !== null && Number(estado.humedad) > 75) {\n    alertas.push({sensor:\"Humedad\", detalle:\"Humedad alta\", valor: estado.humedad + \" %\"});\n}\n\nif (estado.mq6 !== null && Number(estado.mq6) > 600) {\n    alertas.push({sensor:\"MQ6\", detalle:\"Gas inflamable detectado\", valor: estado.mq6 + \" ADC\"});\n}\n\nif (estado.mq7 !== null && Number(estado.mq7) > 500) {\n    alertas.push({sensor:\"MQ7\", detalle:\"Posible monóxido detectado\", valor: estado.mq7 + \" ADC\"});\n}\n\nif (estado.microfono !== null && Number(estado.microfono) > 900) {\n    alertas.push({sensor:\"Sonido\", detalle:\"Ruido fuerte detectado\", valor: estado.microfono + \" ADC\"});\n}\n\nestado.estadoSistema = alertas.length > 0 ? \"ALERTA\" : \"NORMAL\";\nestado.alertas = alertas;\n\ncontext.set(\"estado\", estado);\n\nreturn [\n    { payload: estado },\n    { payload: estado }\n];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 1440,
+        "wires": [
+            [
+                "c34b6882d18ca380"
+            ],
+            [
+                "c845b48ff8b2e9d8"
+            ]
+        ]
+    },
+    {
+        "id": "c34b6882d18ca380",
+        "type": "ui_template",
+        "z": "d7632a6567c9f6cb",
+        "group": "grp_estado_general_v3",
+        "name": "Estado General Sistema",
+        "order": 1,
+        "width": "6",
+        "height": "7",
+        "format": "<div style=\"font-family:sans-serif;padding:12px;\">\n\n  <div style=\"display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;\">\n    <div style=\"font-size:22px;font-weight:bold;\">\n      🏠 Estado del Sistema\n    </div>\n\n    <div ng-style=\"{\n      'background-color': msg.payload.estadoSistema === 'NORMAL' ? '#4CAF50' : '#f44336',\n      'color': 'white',\n      'padding': '7px 14px',\n      'border-radius': '18px',\n      'font-weight': 'bold',\n      'font-size': '14px'\n    }\">\n      {{msg.payload.estadoSistema}}\n    </div>\n  </div>\n\n  <div style=\"font-size:13px;color:#666;margin-bottom:10px;\">\n    🕐 {{msg.payload.ultimaActualizacion}}\n  </div>\n\n  <div style=\"display:grid;grid-template-columns:repeat(2, 1fr);gap:8px;\">\n\n    <div style=\"background:#f5f5f5;border-radius:10px;padding:10px;\">\n      <div style=\"font-size:13px;color:#666;\">🌡️ Temperatura</div>\n      <div style=\"font-size:20px;font-weight:bold;\">{{msg.payload.temperatura || '--'}} °C</div>\n    </div>\n\n    <div style=\"background:#f5f5f5;border-radius:10px;padding:10px;\">\n      <div style=\"font-size:13px;color:#666;\">💧 Humedad</div>\n      <div style=\"font-size:20px;font-weight:bold;\">{{msg.payload.humedad || '--'}} %</div>\n    </div>\n\n    <div style=\"background:#f5f5f5;border-radius:10px;padding:10px;\">\n      <div style=\"font-size:13px;color:#666;\">🔥 MQ6</div>\n      <div style=\"font-size:20px;font-weight:bold;\">{{msg.payload.mq6 || '--'}} ADC</div>\n    </div>\n\n    <div style=\"background:#f5f5f5;border-radius:10px;padding:10px;\">\n      <div style=\"font-size:13px;color:#666;\">☠️ MQ7</div>\n      <div style=\"font-size:20px;font-weight:bold;\">{{msg.payload.mq7 || '--'}} ADC</div>\n    </div>\n\n    <div style=\"background:#f5f5f5;border-radius:10px;padding:10px;grid-column:1 / 3;\">\n      <div style=\"font-size:13px;color:#666;\">🔊 Sonido</div>\n      <div style=\"font-size:20px;font-weight:bold;\">{{msg.payload.microfono || '--'}} ADC</div>\n    </div>\n\n  </div>\n\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 850,
+        "y": 1400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c845b48ff8b2e9d8",
+        "type": "ui_template",
+        "z": "d7632a6567c9f6cb",
+        "group": "grp_alertas_activas_v3",
+        "name": "Alertas Activas",
+        "order": 1,
+        "width": "6",
+        "height": "7",
+        "format": "<div style=\"font-family:sans-serif;padding:12px;\">\n\n  <div style=\"font-size:22px;font-weight:bold;margin-bottom:10px;\">\n    🚨 Alertas Activas\n  </div>\n\n  <div ng-if=\"msg.payload.alertas.length === 0\"\n       style=\"background:#e8f5e9;color:#2e7d32;padding:14px;border-radius:10px;font-weight:bold;\">\n    ✅ Sin alertas activas\n    <div style=\"font-size:13px;font-weight:normal;margin-top:5px;\">\n      Todos los sensores están dentro de rangos normales.\n    </div>\n  </div>\n\n  <div ng-if=\"msg.payload.alertas.length > 0\">\n    <div ng-repeat=\"a in msg.payload.alertas\"\n         style=\"background:#ffebee;color:#b71c1c;padding:12px;border-radius:10px;margin-bottom:8px;border-left:6px solid #f44336;\">\n      <div style=\"font-size:17px;font-weight:bold;\">{{a.sensor}}</div>\n      <div>{{a.detalle}}</div>\n      <div style=\"font-size:13px;color:#555;\">Valor actual: {{a.valor}}</div>\n    </div>\n  </div>\n\n  <div style=\"font-size:13px;color:#777;margin-top:10px;\">\n    Última revisión: {{msg.payload.ultimaActualizacion}}\n  </div>\n\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 830,
+        "y": 1480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2309148cff8a2b34",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "Historial MQ6",
+        "topic": "smarthome/equipoHector/gas/mq6",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 300,
+        "y": 1660,
+        "wires": [
+            [
+                "925d8012f174fed5"
+            ]
+        ]
+    },
+    {
+        "id": "925d8012f174fed5",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "Preparar Historial MQ6",
+        "func": "let datos = msg.payload;\n\nif (typeof datos === \"string\") {\n    try {\n        datos = JSON.parse(datos);\n    } catch (e) {\n        node.warn(\"MQ6: payload no es JSON válido\");\n        return null;\n    }\n}\n\nlet valor = Number(datos.mq6);\n\nif (isNaN(valor)) {\n    node.warn(\"MQ6: valor inválido\");\n    return null;\n}\n\nmsg.topic = \"MQ6\";\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 1660,
+        "wires": [
+            [
+                "6e4d3bb156005b83"
+            ]
+        ]
+    },
+    {
+        "id": "6e4d3bb156005b83",
+        "type": "ui_chart",
+        "z": "d7632a6567c9f6cb",
+        "name": "Historial MQ6",
+        "group": "grp_hist_temp",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "label": "Gas MQ6 Histórico",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Esperando datos de MQ6...",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1023",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ff7f0e",
+            "#aec7e8",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5",
+            "#8c564b"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 790,
+        "y": 1660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3803979476c2d220",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "Historial MQ7",
+        "topic": "smarthome/equipoHector/gas/mq7",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 300,
+        "y": 1720,
+        "wires": [
+            [
+                "f996dfcd14b974db"
+            ]
+        ]
+    },
+    {
+        "id": "f996dfcd14b974db",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "Preparar Historial MQ7",
+        "func": "let datos = msg.payload;\n\nif (typeof datos === \"string\") {\n    try {\n        datos = JSON.parse(datos);\n    } catch (e) {\n        node.warn(\"MQ7: payload no es JSON válido\");\n        return null;\n    }\n}\n\nlet valor = Number(datos.mq7);\n\nif (isNaN(valor)) {\n    node.warn(\"MQ7: valor inválido\");\n    return null;\n}\n\nmsg.topic = \"MQ7\";\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 1720,
+        "wires": [
+            [
+                "200eca64ad48af4a"
+            ]
+        ]
+    },
+    {
+        "id": "200eca64ad48af4a",
+        "type": "ui_chart",
+        "z": "d7632a6567c9f6cb",
+        "name": "Historial MQ7",
+        "group": "grp_hist_temp",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "label": "Gas MQ7 Histórico",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Esperando datos de MQ7...",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1023",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#d62728",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5",
+            "#8c564b"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 790,
+        "y": 1720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dbbfa660b164d3a0",
+        "type": "mqtt in",
+        "z": "d7632a6567c9f6cb",
+        "name": "Cámara evento para LED",
+        "topic": "smarthome/equipoHector/camara/evento",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8f4f8bc6f091abf8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 350,
+        "y": 1820,
+        "wires": [
+            [
+                "f3d22750b94297ef"
+            ]
+        ]
+    },
+    {
+        "id": "f3d22750b94297ef",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "Encender LED por reconocimiento",
+        "func": "let d = msg.payload;\n\n// Si el mensaje viene como texto JSON, lo convertimos a objeto\nif (typeof d === \"string\") {\n    try {\n        d = JSON.parse(d);\n    } catch (e) {\n        node.warn(\"No se pudo convertir el evento de cámara a JSON\");\n        return null;\n    }\n}\n\n// Validaciones del reconocimiento\nlet personaDetectada = d.person_detected === true;\nlet personaConocida = d.known_person === true;\nlet confianza = Number(d.confidence || 0);\n\n// Umbral mínimo de confianza\nlet confianzaMinima = 0.40;\n\n// Si no es persona conocida o no alcanza confianza mínima, no hace nada\nif (!(personaDetectada && personaConocida && confianza >= confianzaMinima)) {\n    return null;\n}\n\n// Mensaje para encender LED\nlet encender = {\n    topic: \"smarthome/equipoHector/control/led\",\n    payload: \"ON\"\n};\n\n// Mensaje para apagar LED\nlet apagar = {\n    topic: \"smarthome/equipoHector/control/led\",\n    payload: \"OFF\"\n};\n\n// Enciende inmediatamente\nnode.send(encender);\n\n// Apaga después de 5 segundos\nsetTimeout(() => {\n    node.send(apagar);\n}, 5000);\n\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 1820,
+        "wires": [
+            [
+                "38ba68401ffe6341"
+            ]
+        ]
+    },
+    {
+        "id": "38ba68401ffe6341",
+        "type": "mqtt out",
+        "z": "d7632a6567c9f6cb",
+        "name": "Enviar LED por reconocimiento",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8f4f8bc6f091abf8",
+        "x": 920,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "71afb98818447c14",
+        "type": "ui_button",
+        "z": "d7632a6567c9f6cb",
+        "name": "Tomar Foto",
+        "group": "grupo_snapshot",
+        "order": 1,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "📸 Tomar Foto",
+        "tooltip": "Captura el frame actual de la cámara",
+        "color": "white",
+        "bgcolor": "#1565C0",
+        "className": "",
+        "x": 310,
+        "y": 1900,
+        "wires": [
+            [
+                "271d73203dfae3c0"
+            ]
+        ]
+    },
+    {
+        "id": "271d73203dfae3c0",
+        "type": "http request",
+        "z": "d7632a6567c9f6cb",
+        "name": "GET /capture",
+        "method": "GET",
+        "ret": "bin",
+        "paytoqs": "ignore",
+        "url": "http://10.144.208.145/capture",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "x": 520,
+        "y": 1900,
+        "wires": [
+            [
+                "4da2f6ced76e0545"
+            ]
+        ]
+    },
+    {
+        "id": "4da2f6ced76e0545",
+        "type": "function",
+        "z": "d7632a6567c9f6cb",
+        "name": "Buffer → Base64",
+        "func": "let b64 = Buffer.from(msg.payload).toString('base64');\nmsg.payload = {\n    img_src: 'data:image/jpeg;base64,' + b64,\n    timestamp: new Date().toLocaleString('es-CL', {timeZone: 'America/Santiago'})\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 740,
+        "y": 1900,
+        "wires": [
+            [
+                "bcc9e8f98a95d6fa"
+            ]
+        ]
+    },
+    {
+        "id": "bcc9e8f98a95d6fa",
+        "type": "ui_template",
+        "z": "d7632a6567c9f6cb",
+        "group": "grupo_snapshot",
+        "name": "Foto Capturada",
+        "order": 2,
+        "width": "9",
+        "height": "7",
+        "format": "<div style='padding:10px;font-family:sans-serif;height:100%'>\n  <div ng-if='msg.payload.img_src' style='display:flex;gap:16px;align-items:flex-start'>\n    <div style='flex:1'>\n      <div ng-style=\"{'background-image':'url('+msg.payload.img_src+')', 'background-size':'contain', 'background-repeat':'no-repeat','background-position':'center'}\"\n           style='width:100%;height:260px;border-radius:10px;border:2px solid #333;background-color:#111'>\n      </div>\n      <p style='color:#888;font-size:12px;margin-top:6px;text-align:center'>📅 {{msg.payload.timestamp}}</p>\n    </div>\n  </div>\n  <div ng-if='!msg.payload.img_src' style='display:flex;align-items:center;justify-content:center;height:80%;color:#555;font-size:14px'>\n    Presiona 📸 para capturar\n  </div>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 960,
+        "y": 1900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8f4f8bc6f091abf8",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "9ddf764e5b8d89a6",
+        "type": "ui_group",
+        "name": "🌡️ TEMPERATURA",
+        "tab": "a108d67895be4396",
+        "order": 5,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3d5c2aa3a3e7146a",
+        "type": "ui_group",
+        "name": "💧 HUMEDAD",
+        "tab": "a108d67895be4396",
+        "order": 6,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7f78e5694e4bcc2c",
+        "type": "ui_group",
+        "name": "🔥 GAS MQ6",
+        "tab": "a108d67895be4396",
+        "order": 7,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b7e3e4a3fc498ced",
+        "type": "ui_group",
+        "name": "☠️ GAS MQ7",
+        "tab": "a108d67895be4396",
+        "order": 8,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "93f5e7ee548f0431",
+        "type": "ui_group",
+        "name": "🔊 SONIDO",
+        "tab": "a108d67895be4396",
+        "order": 9,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e483d5aaec520c23",
+        "type": "telegram bot",
+        "botname": "SmartHome Equipo Hector",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "testenvironment": false,
+        "updatemode": "polling",
+        "pollinterval": 300,
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": 6667,
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbothost": "0.0.0.0",
+        "localbotport": 8443,
+        "publicbotport": 8443,
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "grp_hist_temp",
+        "type": "ui_group",
+        "name": "📈 HISTORIALES",
+        "tab": "a108d67895be4396",
+        "order": 10,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "grupo_iluminacion",
+        "type": "ui_group",
+        "name": "Abrete Sesamo",
+        "tab": "a108d67895be4396",
+        "order": 11,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "22831f1b4a40ce5e",
+        "type": "ui_group",
+        "name": "📷 CÁMARA",
+        "tab": "a108d67895be4396",
+        "order": 3,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "grp_estado_general_v3",
+        "type": "ui_group",
+        "name": "📊 ESTADO GENERAL",
+        "tab": "a108d67895be4396",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "grp_alertas_activas_v3",
+        "type": "ui_group",
+        "name": "🚨 ALERTAS ACTIVAS",
+        "tab": "a108d67895be4396",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "grupo_snapshot",
+        "type": "ui_group",
+        "name": "📸 CAPTURA MANUAL",
+        "tab": "a108d67895be4396",
+        "order": 4,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a108d67895be4396",
+        "type": "ui_tab",
+        "name": "SMART HOME",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "39437f740d92946c",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6",
+            "node-red-contrib-telegrambot": "17.4.12"
+        }
+    }
+]
