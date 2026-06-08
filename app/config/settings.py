@@ -94,7 +94,7 @@ class Settings:
             face_detect_scale_factor=_env_float("FACE_DETECT_SCALE_FACTOR", 1.1),
             face_detect_min_neighbors=_env_int("FACE_DETECT_MIN_NEIGHBORS", 5),
             face_detect_min_size=_env_int("FACE_DETECT_MIN_SIZE", 60),
-            recognition_model_name=_env_str("RECOGNITION_MODEL_NAME", "Facenet512"),
+            recognition_model_name=_env_str("RECOGNITION_MODEL_NAME", "ArcFace"),
             dataset_dir=dataset_dir,
             embeddings_dir=embeddings_dir,
         )
