@@ -9,14 +9,17 @@
 // CONFIGURACIÓN WI-FI
 // =====================================================
 const char* ssid = "autoicc";
-const char* password = "autitos1";
+const char* password = "autitos12";
 
 // =====================================================
 // CONFIGURACIÓN MQTT
 // =====================================================
-const char* mqtt_server = "10.144.208.141";
+const char* mqtt_server = "10.254.148.141";
 const int mqtt_port = 1883;
 const char* mqtt_client_name = "MKR1000_SmartHome_EquipoHector";
+
+const char* mqtt_user = "mi_usuario"; 
+const char* mqtt_password = "equipoHector";
 
 // =====================================================
 // TÓPICOS MQTT - JERARQUÍA ORDENADA
@@ -42,10 +45,6 @@ const int pinLED = 6; // Pin 0 asignado para el LED
 const int pinMQ6 = A1;
 const int pinMQ7 = A2;
 const int pinMicrofono = A4;
-
-// Nota: pinBuzzer estaba en tu setup original pero no estaba definido. 
-// Lo comento aquí para que no de error al compilar, si lo usas descoméntalo y asígnale un pin.
-// const int pinBuzzer = 1; 
 
 // =====================================================
 // OBJETOS GLOBALES
@@ -116,7 +115,7 @@ void reconnect() {
   while (!client.connected()) {
     Serial.print("Intentando conexión MQTT... ");
 
-    if (client.connect(mqtt_client_name)) {
+    if (client.connect(mqtt_client_name, mqtt_user, mqtt_password)) {
       Serial.println("Conectado al broker MQTT.");
       
       // SUSCRIPCIÓN AL TÓPICO DEL LED
