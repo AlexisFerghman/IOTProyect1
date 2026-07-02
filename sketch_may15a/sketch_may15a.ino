@@ -22,7 +22,7 @@ const char* password = "autitos12";
 const char* mqtt_server = "10.254.148.141";
 
 // Puerto MQTT con TLS
-const int mqtt_port = 8883;
+const int mqtt_port = 1883;
 
 const char* mqtt_client_name =
   "MKR1000_SmartHome_EquipoHector";
@@ -84,8 +84,8 @@ const int pinMicrofono = A4;
 
 // Cliente TCP seguro con TLS.
 // El certificado CA ya quedó cargado en el MKR1000.
-WiFiSSLClient mqttSecureClient;
-PubSubClient client(mqttSecureClient);
+WiFiClient mqttClient;
+PubSubClient client(mqttClient);
 
 // Cliente UDP para CoAP
 WiFiUDP udp;
