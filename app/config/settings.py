@@ -34,6 +34,13 @@ def _env_float(name: str, default: float) -> float:
     return float(value)
 
 
+def _env_bool(name: str, default: bool) -> bool:
+    value = os.getenv(name)
+    if value is None or value.strip() == "":
+        return default
+    return value.strip().lower() in {"1", "true", "yes", "on"}
+
+
 def _resolve_path(value: str, default_path: Path) -> Path:
     path = Path(value).expanduser()
     if not path.is_absolute():
@@ -52,6 +59,9 @@ class Settings:
     mqtt_password: str
     mqtt_topic: str
     mqtt_client_id: str
+    mqtt_tls_enabled: bool
+    mqtt_tls_ca_certs: Path
+    mqtt_tls_insecure: bool
     frame_interval_seconds: float
     confidence_threshold: float
     mqtt_event_cooldown_seconds: int
@@ -82,12 +92,18 @@ class Settings:
             stream_url=_env_str("STREAM_URL", "http://10.223.236.145/stream"),
             api_host=_env_str("API_HOST", "0.0.0.0"),
             api_port=_env_int("API_PORT", 5000),
-            mqtt_host=_env_str("MQTT_HOST", "http://10.223.236.145"),
-            mqtt_port=_env_int("MQTT_PORT", 1883),
-            mqtt_username=_env_str("MQTT_USERNAME", ""),
-            mqtt_password=_env_str("MQTT_PASSWORD", ""),
+            mqtt_host=_env_str("MQTT_HOST", "10.254.148.141"),
+            mqtt_port=_env_int("MQTT_PORT", 8883),
+            mqtt_username=_env_str("MQTT_USERNAME", "esp32cam"),
+            mqtt_password=_env_str("MQTT_PASSWORD", "esp32cam"),
             mqtt_topic=_env_str("MQTT_TOPIC", "smarthome/equipoXX/camara/evento"),
             mqtt_client_id=_env_str("MQTT_CLIENT_ID", "iot-face-recognition"),
+            mqtt_tls_enabled=_env_bool("MQTT_TLS_ENABLED", True),
+            mqtt_tls_ca_certs=_resolve_path(
+                _env_str("MQTT_TLS_CA_CERTS", "mosquitto/certs/ca.crt"),
+                PROJECT_ROOT / "mosquitto" / "certs" / "ca.crt",
+            ),
+            mqtt_tls_insecure=_env_bool("MQTT_TLS_INSECURE", False),
             frame_interval_seconds=_env_float("FRAME_INTERVAL_SECONDS", 1.0),
             confidence_threshold=_env_float("CONFIDENCE_THRESHOLD", 0.75),
             mqtt_event_cooldown_seconds=_env_int("MQTT_EVENT_COOLDOWN_SECONDS", 10),

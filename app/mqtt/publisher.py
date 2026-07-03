@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib
 import json
+import ssl
 from typing import Any
 
 try:
@@ -17,11 +18,20 @@ class MQTTPublisher:
         self._settings = settings
         self._client = mqtt.Client(client_id=settings.mqtt_client_id, protocol=mqtt.MQTTv311)
         self._connected = False
-        if settings.mqtt_username:
-            self._client.username_pw_set(settings.mqtt_username, settings.mqtt_password)
+        self._client.username_pw_set(settings.mqtt_username, settings.mqtt_password)
+
+        if settings.mqtt_tls_enabled:
+            if not settings.mqtt_tls_ca_certs.is_file():
+                raise FileNotFoundError(f"No existe el certificado CA MQTT: {settings.mqtt_tls_ca_certs}")
+            self._client.tls_set(
+                ca_certs=str(settings.mqtt_tls_ca_certs),
+                cert_reqs=ssl.CERT_REQUIRED,
+                tls_version=ssl.PROTOCOL_TLS_CLIENT,
+            )
+            self._client.tls_insecure_set(settings.mqtt_tls_insecure)
 
         def _on_connect(client, userdata, flags, reason_code, properties=None):
-            self._connected = True
+            self._connected = reason_code == 0
             print(f"[MQTT] Conexion establecida con codigo {reason_code}")
 
         def _on_disconnect(client, userdata, reason_code, properties=None):
@@ -35,8 +45,13 @@ class MQTTPublisher:
         try:
             self._client.connect(self._settings.mqtt_host, self._settings.mqtt_port, keepalive=60)
             self._client.loop_start()
-            self._connected = True
-            print(f"[MQTT] Conectado a {self._settings.mqtt_host}:{self._settings.mqtt_port}")
+            if self._settings.mqtt_tls_enabled:
+                print(
+                    f"[MQTT] Conectado por TLS a {self._settings.mqtt_host}:{self._settings.mqtt_port} "
+                    f"usando CA {self._settings.mqtt_tls_ca_certs}"
+                )
+            else:
+                print(f"[MQTT] Conectado a {self._settings.mqtt_host}:{self._settings.mqtt_port}")
         except Exception as exc:
             self._connected = False
             print(f"[MQTT] No fue posible conectar al broker: {exc}")

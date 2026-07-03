@@ -20,7 +20,7 @@
 // Enter your WiFi credentials
 // ===========================
 const char *ssid = "autoicc";
-const char *password = "autitos1";
+const char *password = "autitos12";
 
 void startCameraServer();
 void setupLedFlash(int pin);

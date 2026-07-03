@@ -1,4 +1,5 @@
 import json
+import paho.mqtt.client as mqtt
 from datetime import datetime, timedelta
 
 import pandas as pd
@@ -15,6 +16,9 @@ OUTPUT_JSON = "prediccion.json"
 VENTANA_HORAS = 6
 MINUTOS_PREDICCION = 30
 
+cliente = mqtt.Client()
+
+cliente.connect("localhost",1883)
 
 # ===========================
 # Leer CSV
@@ -99,7 +103,14 @@ resultado = {
     "ventana_horas": VENTANA_HORAS
 }
 
-with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
-    json.dump(resultado, f, indent=4, ensure_ascii=False)
+mensaje = {
+    "valor": round(temperatura_predicha,2),
+    "horizon_min":30
+}
+
+cliente.publish(
+    "smarthome/equipoHector/prediccion/temperatura",
+    json.dumps(mensaje)
+)
 
 print(resultado)
