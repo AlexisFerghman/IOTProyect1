@@ -1,5 +1,6 @@
 import json
 import ssl
+import time
 from datetime import datetime, timedelta
 
 import pandas as pd
@@ -10,20 +11,24 @@ import paho.mqtt.client as mqtt
 # Configuración
 # ===========================
 
-CSV_PATH = "datos_temperatura.csv"
+CSV_PATH = "./app/regresion/datos_temperatura.csv"
 
 VENTANA_HORAS = 6
 MINUTOS_PREDICCION = 30
 
+UMBRAL_TEMPERATURA = 30.0
+    
 # MQTT
 MQTT_BROKER = "10.254.148.141"
 MQTT_PORT = 8883
 MQTT_USER = "esp32cam"
 MQTT_PASSWORD = "esp32cam"
 
-CA_CERT = "mosquitto/certs/ca.crt"
+CA_CERT = "./mosquitto/certs/ca.crt"
 
 TOPIC_PREDICCION = "smarthome/equipoHector/prediccion/temperatura"
+
+TOPIC_ALERTA = "smarthome/equipoHector/alerta"
 
 # ===========================
 # MQTT
@@ -59,6 +64,16 @@ cliente.on_connect = on_connect
 cliente.connect(MQTT_BROKER, MQTT_PORT)
 
 cliente.loop_start()
+
+timeout = 10
+
+while not conectado and timeout > 0:
+    time.sleep(0.5)
+    timeout -= 0.5
+
+if not conectado:
+    print("No se pudo conectar al broker MQTT.")
+    exit(1)
 
 # ===========================
 # Leer CSV
@@ -159,6 +174,25 @@ if conectado:
     info.wait_for_publish()
 
     print("Predicción publicada correctamente.")
+
+    if temperatura_predicha > UMBRAL_TEMPERATURA:
+        print("Advertencia: La temperatura predicha supera el umbral.")
+
+        alerta = {
+            "mensaje": "La temperatura predicha supera el umbral.",
+            "valor": round(temperatura_predicha, 2),
+            "horizon_min": MINUTOS_PREDICCION
+        }
+
+
+        info_alerta = cliente.publish(
+            TOPIC_ALERTA,
+            json.dumps(alerta),
+            qos=1
+        )
+        info_alerta.wait_for_publish()
+        print("Alerta publicada correctamente.")
+
 
 else:
     print("No fue posible conectar al broker MQTT.")
