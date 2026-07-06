@@ -28,8 +28,8 @@ const char* mqtt_client_name =
   "MKR1000_SmartHome_EquipoHector";
 
 // Credenciales Mosquitto
-const char* mqtt_username = "mi_usuario";
-const char* mqtt_password = "equipoHector";
+const char* mqtt_username = "mkr1000";
+const char* mqtt_password = "mkr1000";
 
 // =====================================================
 // CONFIGURACIÓN COAP
