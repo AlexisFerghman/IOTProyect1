@@ -3,7 +3,8 @@ FROM python:3.12-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
-    CSV_PATH=/app/datos_temperatura.csv \
+    CSV_PATH=/shared/datos_temperatura.csv \
+    PREDICCION_PATH=/shared/prediccion.json \
     MQTT_BROKER=mosquitto \
     MQTT_PORT=8883 \
     MQTT_USER=esp32cam \
@@ -21,11 +22,10 @@ RUN pip install --upgrade pip \
     && pip install numpy==1.26.4 pandas==2.2.2 paho-mqtt==2.1.0
 
 COPY modeloRegresion.py ./modeloRegresion.py
-COPY datos_temperatura.csv ./datos_temperatura.csv
-COPY prediccion.json ./prediccion.json
-COPY cronjob /etc/cron.d/regresion
+COPY cronjob ./cronjob
 
-RUN chmod 0644 /etc/cron.d/regresion \
+RUN cp /app/cronjob /etc/cron.d/regresion \
+    && chmod 0644 /etc/cron.d/regresion \
     && touch /var/log/cron.log
 
-CMD ["sh", "-c", "cron && tail -f /var/log/cron.log"]
+CMD ["sh", "-c", "printenv > /etc/environment && cron && tail -f /var/log/cron.log"]

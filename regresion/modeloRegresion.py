@@ -12,8 +12,8 @@ import paho.mqtt.client as mqtt
 # Configuración
 # ===========================
 
-CSV_PATH = os.getenv("CSV_PATH", "./app/regresion/datos_temperatura.csv")
-
+CSV_PATH = os.getenv("CSV_PATH", "/shared/datos_temperatura.csv")
+PREDICCION_PATH = os.getenv("PREDICCION_PATH", "/shared/prediccion.json")
 VENTANA_HORAS = 6
 MINUTOS_PREDICCION = 30
 
@@ -80,7 +80,18 @@ if not conectado:
 # Leer CSV
 # ===========================
 
+if not os.path.exists(CSV_PATH) or os.path.getsize(CSV_PATH) == 0:
+    raise FileNotFoundError(
+        f"No existe el CSV de temperatura o está vacío: {CSV_PATH}"
+    )
+
 df = pd.read_csv(CSV_PATH)
+
+columnas_requeridas = {"timestamp", "temperatura"}
+if not columnas_requeridas.issubset(df.columns):
+    raise ValueError(
+        f"El CSV debe contener las columnas: {', '.join(sorted(columnas_requeridas))}"
+    )
 
 # Eliminar cabeceras repetidas
 df = df[df["timestamp"] != "timestamp"].copy()
@@ -146,6 +157,7 @@ hora_predicha = ultima_fecha + timedelta(
 )
 
 resultado = {
+    "fecha_registro": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
     "fecha_entrenamiento": ultima_fecha.strftime("%Y-%m-%d %H:%M:%S"),
     "fecha_prediccion": hora_predicha.strftime("%Y-%m-%d %H:%M:%S"),
     "temperatura_predicha": round(temperatura_predicha, 2),
@@ -154,6 +166,33 @@ resultado = {
 }
 
 print(json.dumps(resultado, indent=4))
+
+# ===========================
+# Guardar historial JSON
+# ===========================
+
+os.makedirs(os.path.dirname(PREDICCION_PATH), exist_ok=True)
+
+predicciones = []
+
+if os.path.exists(PREDICCION_PATH) and os.path.getsize(PREDICCION_PATH) > 0:
+    try:
+        with open(PREDICCION_PATH, "r", encoding="utf-8") as archivo:
+            contenido = json.load(archivo)
+
+        if isinstance(contenido, list):
+            predicciones = contenido
+        elif isinstance(contenido, dict):
+            predicciones = contenido.get("predicciones", [])
+    except json.JSONDecodeError:
+        print("Advertencia: prediccion.json inválido. Se recreará el historial.")
+
+predicciones.append(resultado)
+
+with open(PREDICCION_PATH, "w", encoding="utf-8") as archivo:
+    json.dump({"predicciones": predicciones}, archivo, indent=4)
+
+print(f"Predicción almacenada en {PREDICCION_PATH}.")
 
 # ===========================
 # Publicar MQTT
