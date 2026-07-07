@@ -95,6 +95,174 @@
             "temperatura_predicha": 28.21,
             "muestras_utilizadas": 116,
             "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 00:37:04",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 00:38:04",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 00:39:03",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 00:40:03",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 00:41:03",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 00:42:03",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 00:43:04",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 00:44:03",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 00:45:03",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 00:46:04",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 00:47:03",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 00:48:04",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 01:06:04",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 01:07:03",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 01:08:03",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 01:09:03",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 01:10:03",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 01:11:03",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 05:17:42",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 05:18:45",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
+        },
+        {
+            "fecha_registro": "2026-07-07 01:19:08",
+            "fecha_entrenamiento": "2026-07-02 15:58:46",
+            "fecha_prediccion": "2026-07-02 16:28:46",
+            "temperatura_predicha": 28.21,
+            "muestras_utilizadas": 116,
+            "ventana_horas": 6
         }
     ]
 }

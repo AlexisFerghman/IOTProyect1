@@ -100,16 +100,16 @@ services:
   # REGRESION
   # ==========================================
   regresion:
+    
     build:
       context: ./regresion
       dockerfile: Dockerfile
 
     container_name: iot-regresion-service
     restart: unless-stopped
-
+    
     environment:
       TZ: ${TZ}
-
       CSV_PATH: /shared/datos_temperatura.csv
       PREDICCION_PATH: /shared/prediccion.json
       MQTT_BROKER: mosquitto
@@ -117,6 +117,7 @@ services:
       MQTT_USER: esp32cam
       MQTT_PASSWORD: esp32cam
       MQTT_CA_CERT: /app/mosquitto/certs/ca.crt
+      PREDICCION_INTERVALO_SEGUNDOS: 60
 
     volumes:
       - ./regresion:/app

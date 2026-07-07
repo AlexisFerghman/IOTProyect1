@@ -10,11 +10,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     MQTT_USER=esp32cam \
     MQTT_PASSWORD=esp32cam \
     MQTT_CA_CERT=/app/mosquitto/certs/ca.crt \
-    PREDICCION_INTERVALO_SEGUNDOS=600
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates cron \
-    && rm -rf /var/lib/apt/lists/*
+    PREDICCION_INTERVALO_SEGUNDOS=60
 
 WORKDIR /app
 
@@ -22,10 +18,6 @@ RUN pip install --upgrade pip \
     && pip install numpy==1.26.4 pandas==2.2.2 paho-mqtt==2.1.0
 
 COPY modeloRegresion.py ./modeloRegresion.py
-COPY cronjob ./cronjob
+COPY runner.sh ./runner.sh
 
-RUN cp /app/cronjob /etc/cron.d/regresion \
-    && chmod 0644 /etc/cron.d/regresion \
-    && touch /var/log/cron.log
-
-CMD ["sh", "-c", "printenv > /etc/environment && cron && tail -f /var/log/cron.log"]
+CMD ["sh", "/app/runner.sh"]
