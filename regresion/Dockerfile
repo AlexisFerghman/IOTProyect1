@@ -20,4 +20,4 @@ RUN pip install --upgrade pip \
 COPY modeloRegresion.py ./modeloRegresion.py
 COPY runner.sh ./runner.sh
 
-CMD ["sh", "/app/runner.sh"]
+CMD ["sh", "-c", "tr -d '\\r' < /app/runner.sh > /tmp/runner.sh && sh /tmp/runner.sh"]

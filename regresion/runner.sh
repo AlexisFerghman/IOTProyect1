@@ -1,5 +1,4 @@
 #!/bin/sh
-set -eu
 
 INTERVALO="${PREDICCION_INTERVALO_SEGUNDOS:-60}"
 
