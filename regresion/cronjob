@@ -1,1 +1,4 @@
-*/10 * * * * root . /etc/environment; cd /app && /usr/local/bin/python modeloRegresion.py >> /var/log/cron.log 2>&1
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+* * * * * root set -a; . /etc/environment; set +a; cd /app && /usr/local/bin/python modeloRegresion.py >> /var/log/cron.log 2>&1

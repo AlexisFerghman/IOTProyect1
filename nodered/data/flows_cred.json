@@ -1,0 +1,6 @@
+{
+  "mqtt_mosquitto": {
+    "user": "nodered",
+    "password": "nodered"
+  }
+}
