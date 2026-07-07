@@ -96,6 +96,38 @@ services:
 
 
   # ==========================================
+  # REGRESION
+  # ==========================================
+  regresion:
+    build:
+      context: ./regresion
+      dockerfile: Dockerfile
+
+    container_name: iot-regresion-service
+    restart: unless-stopped
+
+    environment:
+      TZ: ${TZ}
+
+      CSV_PATH: /app/datos_temperatura.csv
+      MQTT_BROKER: mosquitto
+      MQTT_PORT: 8883
+      MQTT_USER: esp32cam
+      MQTT_PASSWORD: esp32cam
+      MQTT_CA_CERT: /app/mosquitto/certs/ca.crt
+
+    volumes:
+      - ./regresion:/app
+      - ./mosquitto/config/certs:/app/mosquitto/certs:ro
+
+    depends_on:
+      - mosquitto
+
+    networks:
+      - smarthome_net
+
+
+  # ==========================================
   # N8N - AGENTE AUTONOMO
   # ==========================================
   n8n:
