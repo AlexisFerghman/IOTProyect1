@@ -1,15 +1,179 @@
+name: smarthome-unidad3
+
 services:
+
+  # ==========================================
+  # MOSQUITTO MQTT
+  # ==========================================
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto_seguro
+    restart: unless-stopped
+
+    ports:
+      - "1883:1883"
+      - "8883:8883"
+
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+
+    networks:
+      - smarthome_net
+
+
+  # ==========================================
+  # NODE-RED
+  # ==========================================
+  nodered:
+    image: nodered/node-red
+    container_name: mynodered
+    restart: unless-stopped
+
+    environment:
+      TZ: ${TZ}
+      FLOWS: flows.json
+
+    ports:
+      - "1880:1880"
+      - "5683:5683/udp"
+
+    volumes:
+      - ./nodered/data:/data
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    depends_on:
+      - mosquitto
+
+    networks:
+      - smarthome_net
+
+
+  # ==========================================
+  # RECONOCIMIENTO FACIAL Y PREDICCION
+  # ==========================================
   face-service:
     build:
-      context: .
+      context: ./face-service
       dockerfile: Dockerfile
+
     container_name: iot-face-service
+    restart: unless-stopped
+
     env_file:
-      - .env
+      - ./face-service/.env
+
+    environment:
+      TZ: ${TZ}
+
+      # API interna del gemelo digital
+      GEMELO_URL: http://nodered:1880/gemelo/estado
+
+      # Prediccion cada 10 minutos
+      PREDICCION_INTERVALO_SEGUNDOS: ${PREDICCION_INTERVALO_SEGUNDOS}
+
     volumes:
-      - ./app/known_faces:/app/app/known_faces:ro
-      - ./app/embeddings:/app/app/embeddings
-      - ./mosquitto/certs:/app/mosquitto/certs:ro
+      - ./face-service/app/known_faces:/app/app/known_faces:ro
+      - ./face-service/app/embeddings:/app/app/embeddings
+
+      # Conservamos la misma ruta interna usada por el proyecto original
+      - ./mosquitto/config/certs:/app/mosquitto/certs:ro
+
+      # Mantener archivos generados por la prediccion
+      - ./face-service/prediccion.json:/app/prediccion.json
+      - ./face-service/datos_temperatura.csv:/app/datos_temperatura.csv
+
     ports:
       - "5001:5000"
+
+    depends_on:
+      - mosquitto
+      - nodered
+
+    networks:
+      - smarthome_net
+
+
+  # ==========================================
+  # N8N - AGENTE AUTONOMO
+  # ==========================================
+  n8n:
+    image: n8nio/n8n
+    container_name: n8n
     restart: unless-stopped
+
+    ports:
+      - "5678:5678"
+
+    environment:
+      TZ: ${TZ}
+      GENERIC_TIMEZONE: ${TZ}
+
+      N8N_HOST: localhost
+      N8N_PORT: 5678
+      N8N_PROTOCOL: http
+
+      N8N_SECURE_COOKIE: "false"
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./n8n/local-files:/files
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    depends_on:
+      - nodered
+      - mosquitto
+
+    networks:
+      - smarthome_net
+
+
+  # ==========================================
+  # GRAFANA
+  # ==========================================
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+
+    ports:
+      - "3000:3000"
+
+    environment:
+      TZ: ${TZ}
+
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+
+      # Permite leer el JSON entregado por Node-RED
+      GF_PLUGINS_PREINSTALL: yesoreyeram-infinity-datasource
+
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+
+    depends_on:
+      - nodered
+
+    networks:
+      - smarthome_net
+
+
+volumes:
+  mosquitto_data:
+  mosquitto_log:
+  n8n_data:
+  grafana_data:
+
+
+networks:
+  smarthome_net:
+    name: smarthome_net
+    driver: bridge
