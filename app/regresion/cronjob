@@ -1,0 +1,1 @@
+*/10 * * * * cd /app && /usr/local/bin/python modeloRegresion.py >> /var/log/cron.log 2>&1
